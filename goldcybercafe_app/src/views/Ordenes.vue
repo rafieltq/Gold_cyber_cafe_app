@@ -1,136 +1,28 @@
 <template>
     <v-container>
         <v-content>
-            <v-layout>
-                <v-flex>
+            <v-layout wrap>
+                <v-flex 
+                v-for="(orden,index) of ordenes" 
+                :key="index"
+                xs12
+                
+                >
                     <v-card
-    class="mx-auto"
-    max-width="300"
-  >
-    <v-img
-      class="white--text align-end"
-      height="200px"
-      src="https://www.sincortapisa.com/wp-content/uploads/2019/06/estudio-revelo-cafe-aumenta-longevidad_0_0_630_392.jpg"
-    >
-      <v-card-title>Café</v-card-title>
-    </v-img>
+                      class="mt-2"
+                      color="orange"
+                      text
+                      dark
+                    >
+                      <v-card-title>{{orden.titulo}} - {{orden.numero_orden}}</v-card-title>
 
-    <v-card-subtitle class="pb-0">Mesa número 1</v-card-subtitle>
+                      <v-spacer></v-spacer>
 
-    <v-card-text class="text--primary">
-      <div>Café</div>
+                      <v-card-actions>
+                          <v-btn color="brown accent-4" text><v-icon left>mdi-pencil</v-icon> Orden Lista</v-btn>
+                      </v-card-actions>
 
-      <div>Disfrutelo</div>
-    </v-card-text>
-
-    <v-card-actions>
-      <v-btn
-        color="orange"
-        text
-      >
-        Orden lista
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-
-                </v-flex>
-
-                <v-flex>
-                <v-card
-    class="mx-auto"
-    max-width="300"
-  >
-    <v-img
-      class="white--text align-end"
-      height="200px"
-      src="https://cdn2.cocinadelirante.com/sites/default/files/styles/gallerie/public/images/2018/05/hamburguesa-con-fondue-receta.jpg"
-    >
-      <v-card-title>Hamburguesa</v-card-title>
-    </v-img>
-
-    <v-card-subtitle class="pb-0">Mesa número 5</v-card-subtitle>
-
-    <v-card-text class="text--primary">
-      <div>Hamburguesa</div>
-
-      <div>Disfrutelo</div>
-    </v-card-text>
-
-    <v-card-actions>
-      <v-btn
-        color="orange"
-        text
-      >
-        Orden lista
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-                </v-flex>
-            </v-layout>
-
-            <v-layout mt-4>
-                <v-flex>
-                                  <v-card
-    class="mx-auto"
-    max-width="300"
-  >
-    <v-img
-      class="white--text align-end"
-      height="200px"
-      src="https://placeralplato.com/files/2015/11/Pan-para-hot-dogs-640x480.jpg?width=1200&enable=upscale"
-    >
-      <v-card-title>Hot dog</v-card-title>
-    </v-img>
-
-    <v-card-subtitle class="pb-0">Mesa número 10</v-card-subtitle>
-
-    <v-card-text class="text--primary">
-      <div>Hot dog</div>
-
-      <div>Disfrutelo</div>
-    </v-card-text>
-
-    <v-card-actions>
-      <v-btn
-        color="orange"
-        text
-      >
-        Orden lista
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-                </v-flex>
-
-                <v-flex>
-                                  <v-card
-    class="mx-auto"
-    max-width="300"
-  >
-    <v-img
-      class="white--text align-end"
-      height="200px"
-      src="https://www.sincortapisa.com/wp-content/uploads/2019/06/estudio-revelo-cafe-aumenta-longevidad_0_0_630_392.jpg"
-    >
-      <v-card-title>Café</v-card-title>
-    </v-img>
-
-    <v-card-subtitle class="pb-0">Mesa número 7</v-card-subtitle>
-
-    <v-card-text class="text--primary">
-      <div>Café</div>
-
-      <div>Disfrutelo</div>
-    </v-card-text>
-
-    <v-card-actions>
-      <v-btn
-        color="orange"
-        text
-      >
-        Orden lista
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+                    </v-card>
                 </v-flex>
             </v-layout>
         </v-content>
@@ -140,6 +32,15 @@
 
 <script>
 export default {
-    name: 'Ordenes'
+    name: 'Ordenes',
+    data() {
+      return {
+        ordenes: [
+            {titulo: 'Orden',numero_orden: '1'},
+            {titulo: 'Orden',numero_orden: '2'},
+            {titulo: 'Orden',numero_orden: '2'}
+          ]
+      }
+    },
 }
 </script>
