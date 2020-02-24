@@ -4,14 +4,13 @@
       <v-layout>
         <v-flex>
           <v-card flat color="orange" >
-            <v-card-title class="justify-center">
-              Gold Cyber Café
-            </v-card-title>
+              <v-card-title class="justify-center">
+                Gold Cyber Café
+              </v-card-title>
 
-            <v-card-text class="text-center font-weight-bold">
-              Un servicio veloz y eficiente.
-            </v-card-text>
-            
+              <v-card-text class="text-center font-weight-bold">
+                Un servicio veloz y eficiente.
+              </v-card-text>
           </v-card>
         </v-flex>
       </v-layout>

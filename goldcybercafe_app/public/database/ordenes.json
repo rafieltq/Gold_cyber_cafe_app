@@ -1,0 +1,27 @@
+[
+    {
+            
+        "id":1,
+            "fecha_creacion":"2020-02-23",
+            "productos":
+            [
+    
+            {"nombre":"cafe", "precio":50, "categoria":"cafe"}
+            
+            ]
+            
+    },
+    {
+            
+        "id":2,
+            "fecha_creacion":"2020-03-23",
+            "productos":
+            [
+    
+            {"nombre":"Hamburguesa", "precio":50, "categoria":"Comida Rapida"}
+            
+            ]
+            
+    }
+]
+

@@ -1,0 +1,14 @@
+[
+    {
+        "nombre": "Cafe",
+        "precio": 50,
+        "categoria": "cafes",
+        "img": "https://as.com/deporteyvida/imagenes/2018/02/16/portada/1518787733_123354_1518787790_noticia_normal.jpg"
+    },
+    {
+        "nombre": "Hamburguesa",
+        "precio": 100,
+        "categoria": "comida",
+        "img": "https://cocina-casera.com/wp-content/uploads/2016/11/hamburguesa-queso-receta.jpg"
+    }
+]

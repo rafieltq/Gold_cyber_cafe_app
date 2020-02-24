@@ -7,7 +7,7 @@
     >
       <v-app-bar-nav-icon dark @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Gold Cyber Café</v-toolbar-title>
+      <v-toolbar-title @click="goto('/')">Gold Cyber Café</v-toolbar-title>
 
     </v-app-bar>
 
@@ -15,8 +15,8 @@
     
     <v-navigation-drawer absolute  dark temporary color="orange" v-model="drawer">
 
-      <v-list-item>
-        <v-list-item-content>
+      <v-list-item link @click="goto('/')">
+        <v-list-item-content >
           <v-list-item-title class="title">
             Gold Cyber Café
           </v-list-item-title>
@@ -28,7 +28,7 @@
 
       <v-divider></v-divider>
 
-      <v-list
+      <v-list v-for="(item,index) in items" :key="index"
         dense
         nav
         
@@ -36,36 +36,14 @@
         <v-list-item link>
 
           <v-list-item-icon>
-            <v-icon>mdi-view-dashboard</v-icon>
+            <v-icon>{{item.icon}}</v-icon>
           </v-list-item-icon>
 
-          <v-list-item-content @click="goto('ordenes')">
-            <v-list-item-title>Ordenes</v-list-item-title>
+          <v-list-item-content @click="goto(item.route)">
+            <v-list-item-title>{{item.text}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
-         <v-list-item link>
-
-          <v-list-item-icon>
-            <v-icon>mdi-table</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content @click="goto('Mesas')">
-            <v-list-item-title>Mesas</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-         <v-list-item link>
-
-          <v-list-item-icon>
-            <v-icon>mdi-help-box</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content @click="goto('About')">
-            <v-list-item-title>Sobre nosotros</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        
+  
       </v-list>
     </v-navigation-drawer>
 
@@ -78,7 +56,12 @@ export default {
     name: 'TheNav',
     data(){
       return{
-        drawer: false
+        drawer: false,
+        items: [
+        {text:'Ordenes',icon:'mdi-view-dashboard',route:'/ordenes'},
+        {text:'Mesas',icon:'mdi-table',route:'/mesas'},
+        {text:'Productos',icon:'mdi-cart',route:'/productos'},
+      ]
       }
         
     },
