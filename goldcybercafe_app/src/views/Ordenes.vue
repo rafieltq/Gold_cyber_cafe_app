@@ -3,6 +3,7 @@
         <v-content>
             <v-layout wrap>
                 <v-flex xs12>
+                  
                     <v-card v-for="(pedido,index) in pedidos" 
                       :key="index"
                       class="mt-2"
@@ -10,8 +11,9 @@
                       text
                       dark
                     >
-                    
+                      
                       <v-layout>
+                        
                         <v-card-text>{{pedido.id}}</v-card-text>
                         <v-card-text>{{pedido.fecha_creacion}}</v-card-text>
                         
@@ -32,6 +34,7 @@
 
                     </v-card>
                 </v-flex>
+
             </v-layout>
         </v-content>
     </v-container>
@@ -58,5 +61,7 @@ export default {
           pedidos:[]
       }
     }
-}
+            
+  }
+
 </script>
