@@ -29,7 +29,7 @@
 
 
                       <v-card-actions>
-                          <v-btn color="brown accent-4" text><v-icon left>mdi-pencil</v-icon> Orden Lista</v-btn>
+                          <v-btn color="brown darken-4" text><v-icon left>mdi-pencil</v-icon> Orden Lista</v-btn>
                       </v-card-actions>
 
                     </v-card>

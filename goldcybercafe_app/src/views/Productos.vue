@@ -30,7 +30,7 @@ export default {
   methods: {
     saveProducts() {
       const options = {
-        headers: { "Content-type": "application/json" },
+        headers: { "Content-Type": "application/json" },
         rejectUnauthorized: false
       };
 
@@ -42,7 +42,7 @@ export default {
 
       axios
         .post(
-          "http://gibucket.a2hosted.com/gold_cyber_cafe_api/productos/productos",
+          "http://localhost/gold_cyber_cafe_api/productos/productos",
           data,
           options
         )
