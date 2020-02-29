@@ -35,9 +35,9 @@ export default {
       };
 
       const data = {
-        nombre: "tomate",
-        precio: 50,
-        unidad_medida: "unidad"
+        nombre: this.nombre,
+        precio: this.precio,
+        unidad_medida: this.unidad_medida,
       };
 
       axios
