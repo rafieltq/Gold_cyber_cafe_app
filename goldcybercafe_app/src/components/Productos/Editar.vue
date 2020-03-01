@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="show" width="500">
       <v-card :loading="loading">
-        <v-card-title class="headline grey lighten-2" primary-title>Crear producto</v-card-title>
+        <v-card-title class="headline grey lighten-2" primary-title>Editar producto - {{item.nombre}}</v-card-title>
 
         <v-card-text>
           <v-form v-model="valid">
@@ -10,7 +10,7 @@
               <v-row>
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="product.nombre"
+                    v-model="item.nombre"
                     :rules="requireInputRule"
                     label="Nombre"
                     required
@@ -20,7 +20,7 @@
                 <v-col cols="12" md="4">
                   <v-text-field
                     type="number"
-                    v-model="product.precio"
+                    v-model="item.precio"
                     :rules="requireInputRule"
                     label="precio"
                     required
@@ -29,7 +29,7 @@
 
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="product.unidad_medida"
+                    v-model="item.unidad_medida"
                     :rules="requireInputRule"
                     label="Unidad de medida"
                     required
@@ -43,7 +43,7 @@
         <v-divider></v-divider>
 
         <v-card-actions>
-          <v-btn color="orange" dark @click="saveProduct()">Guardar</v-btn>
+          <v-btn color="orange" dark @click="editProduct()">Guardar</v-btn>
           <v-spacer></v-spacer>
           <v-btn color="error" @click="$emit('close')">Cerrar</v-btn>
         </v-card-actions>
@@ -55,37 +55,26 @@
 <script>
 import axios from 'axios'
 export default {
-  props: ["show"],
-  data: () => ({
-    valid: false,
-    requireInputRule: [v => !!v || "Este campo es requerido"],
-    product: {
-      nombre: "",
-      precio: 0,
-      unidad_medida: "unidad"
-    },
-    loading: false,
-
-  }),
+  data() {
+    return {
+      requireInputRule: [v => !!v || "Este campo es requerido"],
+      loading: false,
+      valid: false,
+    };
+  },
+  props: ["item",'show'],
   methods: {
-    saveProduct() {
-        this.loading = true;
-        const options = {
-        headers: { "Content-Type": "application/json" },
-        rejectUnauthorized: false
-      };
+    editProduct() {
       axios
-        .post(
-          "http://localhost/gold_cyber_cafe_api/productos/productos",
-          this.product,
-          options
+        .put(
+          `http://localhost/gold_cyber_cafe_api/productos/productos/${this.item.id}`,
+          this.item,
+          this.axiosOptions
         )
         .then(response => {
           this.$emit('close');
           this.loading = false;
-          this.product.nombre = "",
-          this.product.precio = 0,
-          this.product.unidad_medida = "Unidad"
+          
         })
         .catch(error => {
           console.log(error);
