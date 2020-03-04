@@ -2,35 +2,38 @@
   <div>
     <v-dialog v-model="show" width="500">
       <v-card :loading="loading">
-        <v-card-title class="headline grey lighten-2" primary-title>Crear producto</v-card-title>
+        <v-card-title class="headline grey lighten-2" primary-title>Editar mesa</v-card-title>
+
         <v-card-text>
           <v-form v-model="valid">
             <v-container>
               <v-row>
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="product.nombre"
-                    :rules="requireInputRule"
-                    label="Nombre"
-                    required
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="12" md="4">
-                  <v-text-field
                     type="number"
-                    v-model="product.precio"
+                    v-model="item.cantidad_personas"
                     :rules="requireInputRule"
-                    label="precio"
+                    label="Cantidad de personas"
                     required
                   ></v-text-field>
                 </v-col>
 
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="product.unidad_medida"
+                    type="text"
+                    v-model="item.descripcion"
                     :rules="requireInputRule"
-                    label="Unidad de medida"
+                    label="descripcion"
+                    required
+                  ></v-text-field>
+                </v-col>
+
+                  <v-col cols="12" md="4">
+                  <v-text-field
+                    type="text"
+                    v-model="item.disponible"
+                    :rules="requireInputRule"
+                    label="Estado"
                     required
                   ></v-text-field>
                 </v-col>
@@ -42,7 +45,7 @@
         <v-divider></v-divider>
 
         <v-card-actions>
-          <v-btn color="orange" dark @click="saveProduct()">Guardar</v-btn>
+          <v-btn color="orange" dark @click="editMesa()">Guardar</v-btn>
           <v-spacer></v-spacer>
           <v-btn color="error" @click="$emit('close')">Cerrar</v-btn>
         </v-card-actions>
@@ -52,38 +55,27 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
-  props: ["show"],
-  data: () => ({
-    valid: false,
-    requireInputRule: [v => !!v || "Este campo es requerido"],
-    product: {
-      nombre: "",
-      precio: 0,
-      unidad_medida: "unidad"
-    },
-    loading: false
-  }),
+  data() {
+    return {
+      requireInputRule: [v => !!v || "Este campo es requerido"],
+      loading: false,
+      valid: false,
+    };
+  },
+  props: ["item",'show'],
   methods: {
-    saveProduct() {
-      this.loading = true;
-      const options = {
-        headers: { "Content-Type": "application/json" },
-        rejectUnauthorized: false
-      };
+    editMesa() {
       axios
-        .post(
-          "http://localhost/gold_cyber_cafe_api/productos/productos",
-          this.product,
-          options
+        .put(
+          `http://localhost/gold_cyber_cafe_api/mesas/mesas/${this.item.id}`,
+          this.item,
+          this.axiosOptions
         )
         .then(response => {
-          this.$emit("close");
+          this.$emit('close');
           this.loading = false;
-          (this.product.nombre = ""),
-          (this.product.precio = 0),
-          (this.product.unidad_medida = "Unidad");
         })
         .catch(error => {
           console.log(error);

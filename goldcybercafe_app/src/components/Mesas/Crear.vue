@@ -2,38 +2,39 @@
   <div>
     <v-dialog v-model="show" width="500">
       <v-card :loading="loading">
-        <v-card-title class="headline grey lighten-2" primary-title>Crear producto</v-card-title>
+        <v-card-title class="headline grey lighten-2" primary-title>Crear mesa</v-card-title>
         <v-card-text>
           <v-form v-model="valid">
             <v-container>
               <v-row>
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="product.nombre"
-                    :rules="requireInputRule"
-                    label="Nombre"
-                    required
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="12" md="4">
-                  <v-text-field
                     type="number"
-                    v-model="product.precio"
+                    v-model="table.cantidad_personas"
                     :rules="requireInputRule"
-                    label="precio"
+                    label="Cantidad de personas"
                     required
                   ></v-text-field>
                 </v-col>
 
                 <v-col cols="12" md="4">
                   <v-text-field
-                    v-model="product.unidad_medida"
+                    v-model="table.descripcion"
                     :rules="requireInputRule"
-                    label="Unidad de medida"
+                    label="Descripción"
                     required
                   ></v-text-field>
                 </v-col>
+
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="table.disponible"
+                    :rules="requireInputRule"
+                    label="Estado"
+                    required
+                  ></v-text-field>
+                </v-col>
+
               </v-row>
             </v-container>
           </v-form>
@@ -58,10 +59,11 @@ export default {
   data: () => ({
     valid: false,
     requireInputRule: [v => !!v || "Este campo es requerido"],
-    product: {
-      nombre: "",
-      precio: 0,
-      unidad_medida: "unidad"
+    table: {
+      id: "",
+      cantidad_personas: 0,
+      descripcion:"",
+      disponible: 'si'
     },
     loading: false
   }),
@@ -74,16 +76,17 @@ export default {
       };
       axios
         .post(
-          "http://localhost/gold_cyber_cafe_api/productos/productos",
-          this.product,
+          "http://localhost/gold_cyber_cafe_api/mesas/mesas",
+          this.table,
           options
         )
         .then(response => {
           this.$emit("close");
           this.loading = false;
-          (this.product.nombre = ""),
-          (this.product.precio = 0),
-          (this.product.unidad_medida = "Unidad");
+          this.table.cantidad_personas = 0;
+          this.table.descripcion = "";
+          this.table.disponible = "si";
+         
         })
         .catch(error => {
           console.log(error);

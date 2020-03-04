@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="show">
         <v-card>
-      <v-card-title class="headline grey lighten-2" primary-title>Crear producto</v-card-title>
+      <v-card-title class="headline grey lighten-2" primary-title>Eliminar producto</v-card-title>
 
       <v-card-text>
         
@@ -15,7 +15,7 @@
       <v-card-actions>
         <v-btn color="error" dark @click="$emit('confirm')">Eliminar</v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="orange" text @click="$emit('close')">Cerrar</v-btn>
+        <v-btn color="orange" text @click="$emit('close')">Cancelar</v-btn>
       </v-card-actions>
     </v-card>
     </v-dialog>

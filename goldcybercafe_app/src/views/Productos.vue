@@ -9,12 +9,7 @@
             dark
             @click="showCreateProductsDialog = true"
           >Crear producto</v-btn>
-          <v-data-table
-            :loading="loading"
-            :headers="headers"
-            :items="productos"
-            class="elevation-1"
-          >
+          <v-data-table :headers="headers" :items="productos" class="elevation-1">
             <template v-slot:item.action="{ item }">
               <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
               <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
@@ -25,17 +20,17 @@
     </v-content>
     <create-products @close="closeDialog('createProducts')" :show="showCreateProductsDialog"></create-products>
     <edit-products :item="itemTemp" :show="showEditDialog" @close="closeDialog('editProducts')"></edit-products>
-    <delete-products-dialog :show="showDeleteDialog" @confirm="confirmDelete()" @close="closeDialog('deleteProductsDialog')"></delete-products-dialog>
-    <v-snackbar
-      top
-      right
-      color="success"
-      v-model="snackbar"
-    >
+    <delete-products-dialog
+      :show="showDeleteDialog"
+      @confirm="confirmDelete()"
+      @close="closeDialog('deleteProductsDialog')"
+    ></delete-products-dialog>
+    <v-snackbar :timeout="tiemout" top right color="success" v-model="snackbar">
       Acción realizada correctamente
-      <v-btn text @click="snackbar = false"><v-icon>mdi-check</v-icon></v-btn>
+      <v-btn text @click="snackbar = false">
+        <v-icon>mdi-check</v-icon>
+      </v-btn>
     </v-snackbar>
-
   </v-container>
 </template>
 
@@ -51,17 +46,18 @@ export default {
   components: {
     createProducts,
     editProducts,
-    deleteProductsDialog,
+    deleteProductsDialog
   },
   data() {
     return {
       productos: [],
-      showEditDialog: false,
       nombre: "",
+      showEditDialog: false,
       showCreateProductsDialog: false,
       showDeleteDialog: false,
       itemTemp: {},
       snackbar: false,
+      tiemout: 2000,
       precio: 0,
       loading: false,
       axiosOptions: {
@@ -80,16 +76,13 @@ export default {
     closeDialog(target) {
       if (target === "createProducts") {
         this.showCreateProductsDialog = false;
-        this.snackbar = true
-      } else if (target === 'deleteProductsDialog'){
+      } else if (target === "deleteProductsDialog") {
         this.showDeleteDialog = false;
-      }
-      else {
+      } else {
         this.showEditDialog = false;
-        this.snackbar = true
+        this.snackbar = true;
       }
       this.getProducts();
-      
     },
     getProducts() {
       axios
@@ -105,16 +98,14 @@ export default {
         });
     },
     deleteItem(item) {
-
-      this.showDeleteDialog = true
+      this.showDeleteDialog = true;
       this.itemTemp = item;
-      
     },
     editItem(item) {
       this.itemTemp = item;
       this.showEditDialog = true;
     },
-    confirmDelete(){
+    confirmDelete() {
       axios
         .delete(
           `http://localhost/gold_cyber_cafe_api/productos/productos/${this.itemTemp.id}`,
